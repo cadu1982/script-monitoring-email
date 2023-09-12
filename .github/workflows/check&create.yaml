@@ -1,0 +1,43 @@
+name: Check if it has a new e-mail if yes, create a new task in the Azure Devops board
+
+on:
+  workflow_call:
+  schedule:
+    - cron: "*/5 8-18 * * 1-5"
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+jobs:
+  check-create:
+    runs-on: ubuntu-latest
+    env:
+      ACCOUNT_EMAIL: devops.cards@bancoarbi.com.br
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_SECRET: ${{ secrets.APP_SECRET }}
+      URL_AZURE_DEVOPS: https://dev.azure.com/bancoarbi1/
+      PROJECT: Geral
+      PERSONAL_ACESS_TOKEN: ${{ secrets.ABD1SPGHWF001 }}
+      TENANT_ID: dc5660c3-d144-419c-be1d-64ebe8860899
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.0
+      
+      - name: Azure Devops Login
+        run: |
+          export AZURE_DEVOPS_EXT_PAT=${{ secrets.PERSONAL_ACESS_TOKEN }}
+          echo  ${{ secrets.PERSONAL_ACESS_TOKEN }} | az devops login --org ${{ env.URL_AZURE_DEVOPS }}
+      
+      - name: Check E-mail
+        id: script
+        run: |
+          pip install -r ./scripts/requirements.txt
+          python3 ./scripts/script.py
+      
+      - name: Logout Azure Devops 
+        run: az devops logout
+      
+        
