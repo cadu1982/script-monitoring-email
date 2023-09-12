@@ -14,13 +14,13 @@ jobs:
   check-create:
     runs-on: ubuntu-latest
     env:
-      ACCOUNT_EMAIL: devops.cards@bancoarbi.com.br
+      ACCOUNT_EMAIL: exemplo@exemplo.com.br
       APP_ID: ${{ secrets.APP_ID }}
       APP_SECRET: ${{ secrets.APP_SECRET }}
-      URL_AZURE_DEVOPS: https://dev.azure.com/bancoarbi1/
+      URL_AZURE_DEVOPS: https://dev.azure.com/XXXXXXX/
       PROJECT: Geral
-      PERSONAL_ACESS_TOKEN: ${{ secrets.ABD1SPGHWF001 }}
-      TENANT_ID: dc5660c3-d144-419c-be1d-64ebe8860899
+      PERSONAL_ACESS_TOKEN: ${{ secrets.XXXXXXXX }}
+      TENANT_ID: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 
     steps:
       - name: Checkout
